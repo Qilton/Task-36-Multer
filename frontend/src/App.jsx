@@ -3,13 +3,14 @@ import axios from "axios";
 
 function App() {
   const [aa, setSelectedFile] = useState([]);
-  const [message, setMessage] = useState("");
+  const [url, seturl] = useState("");
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/", {
+        const res = await axios.get("https://task-36-multer-server.vercel.app/url", {
           withCredentials: true,
         });
+        seturl(res.data);
         console.log(res.data);
       } catch (err) {
         console.error(err);
@@ -32,7 +33,7 @@ useEffect(() => {
     
 
     try {
-const res=await axios.post("http://localhost:8080/upload", {aa}, {
+const res=await axios.post("https://task-36-multer-server.vercel.app/upload", {aa}, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -59,7 +60,7 @@ const res=await axios.post("http://localhost:8080/upload", {aa}, {
         <input type="file" name="aa" onChange={handleFileChange} />
         <button type="submit">Upload</button>
       </form>
-      {message && <p>{message}</p>}
+      {url && <p>{url}</p>}
     </div>
   );
 }

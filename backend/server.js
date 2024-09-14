@@ -36,8 +36,15 @@ const storage = multer.diskStorage({
     storage
 })
 
-app.get('/',(req,res)=>{
-    res.send('Hello World')
+app.get('/urls',(req,res)=>{
+  UserModel.find({},(err,data)=>{
+    if(err){
+      res.json(0)
+    }
+    else{
+      res.send(data.url)
+    }
+  })
 }
 )
 
